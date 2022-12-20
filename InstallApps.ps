@@ -1,0 +1,89 @@
+# ------------------------------------------------------
+# Created by Tony Fitzsimmons
+# 20/12/2022 tonyfitzs@gmail.com
+# ------------------------------------------------------
+# ------------------------------------------------------
+#Set-ExecutionPolicy  (note if this dosnt work you need to manualy Set-ExecutionPolicy, you can use "Set-ExecutionPolicy unrestricted" but you must remeber to set it back to "Set-ExecutionPolicy restricted" for security purposes. 
+# ------------------------------------------------------
+Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
+Clear-Host
+$ErrorActionPreference = "SilentlyContinue"
+Set-TimeZone "AUS Eastern Standard Time"
+# ------------------------------------------------------
+# Get rid of stupid "are you sure, are you realy sure, are you realy realy sure windows nag screen when installing stuff... (this is optional) 
+# ------------------------------------------------------
+New-ItemProperty -Path HKLM:Software\Microsoft\Windows\CurrentVersion\policies\system -Name EnableLUA -PropertyType DWord -Value 0 -Force
+# ------------------------------------------------------
+# install chocolatey apps
+# ------------------------------------------------------
+choco feature enable -n allowGlobalConfirmation
+Write-Host "Installing Chrome"
+choco install googlechrome -y
+Write-Host "Installing Visual Studio Code"
+choco install vscode -y
+Write-Host "Installing Registry Workshop"
+choco install registryworkshop -y
+Write-Host "Installing NodeJS"
+choco install nodejs -y
+Write-Host "Installing Termite"
+choco install termite -y
+
+Write-Host "Java JDK"
+choco install jdk8  -y
+#Write-Host "Android Studio"
+#choco install androidstudio -y
+
+Write-Host "Installing Appium"
+choco install appium-desktop -y
+
+
+# ------------------------------------------------------
+# the rest of the script gets rid of bloatware.
+# ------------------------------------------------------
+Get-AppxPackage -AllUsers | Remove-AppxPackage
+
+# ------------------------------------------------------
+# if the above command dosnt work, set each app manualy below.
+# ------------------------------------------------------
+
+# Get-AppxPackage *3dbuilder* | Remove-AppxPackage
+# Get-AppxPackage *windowsalarms* | Remove-AppxPackage
+# Get-AppxPackage *windowscamera* | Remove-AppxPackage
+# Get-AppxPackage *officehub* | Remove-AppxPackage
+# Get-AppxPackage *zunemusic* | Remove-AppxPackage
+# Get-AppxPackage *windowscommunicationapps* | Remove-AppxPackage
+# Get-AppxPackage *windowsmaps* | Remove-AppxPackage
+# Get-AppxPackage *solitairecollection* | Remove-AppxPackage
+# Get-AppxPackage *zunevideo* | Remove-AppxPackage
+# Get-AppxPackage *bingnews* | Remove-AppxPackage
+# Get-AppxPackage *onenote* | Remove-AppxPackage
+# Get-AppxPackage *photos* | Remove-AppxPackage
+# Get-AppxPackage *skypeapp* | Remove-AppxPackage
+# Get-AppxPackage *getstarted* | Remove-AppxPackage
+# Get-AppxPackage *sound recorder* | Remove-AppxPackage
+# Get-AppxPackage *bingweather* | Remove-AppxPackage
+# Get-AppxPackage *xboxapp* | Remove-AppxPackage
+
+# Get-AppxPackage -AllUsers -Name king.com.CandyCrushFriends | Remove-AppxPackage
+# Get-AppxPackage -AllUsers -Name king.com.FarmHeroesSaga | Remove-AppxPackage
+# Get-AppxPackage -AllUsers -Name Microsoft.Print3D | Remove-AppxPackage
+# Get-AppxPackage -AllUsers -Name Microsoft.Microsoft3DViewer | Remove-AppxPackage
+
+# Get-AppxPackage -AllUsers -Name Microsoft.MicrosoftOfficeHub | Remove-AppxPackage
+# Get-AppxPackage -AllUsers -Name Microsoft.MicrosoftSolitaireCollection | Remove-AppxPackage
+
+# Get-AppxPackage -AllUsers -Name Microsoft.WindowsMaps | Remove-AppxPackage
+# Get-AppxPackage -AllUsers -Name Microsoft.BingWeather | Remove-AppxPackage
+# Get-AppxPackage -AllUsers -Name Microsoft.BingSports | Remove-AppxPackage
+# Get-AppxPackage -AllUsers -Name Microsoft.BingNews | Remove-AppxPackage
+# Get-AppxPackage -AllUsers -Name Microsoft.WindowsPhone | Remove-AppxPackage
+# Get-AppxPackage -AllUsers -Name Microsoft.BingFinance | Remove-AppxPackage
+# Get-AppxPackage -AllUsers -Name Microsoft.WindowsSoundRecorder | Remove-AppxPackage
+# Get-AppxPackage -AllUsers -Name Microsoft.Windows.Photos | Remove-AppxPackage
+# Get-AppxPackage -AllUsers -Name Microsoft.WindowsCamera | Remove-AppxPackage
+# Get-AppxPackage -AllUsers -Name Microsoft.WindowsAlarms | Remove-AppxPackage
+# Get-AppxPackage -AllUsers -Name Microsoft.People | Remove-AppxPackage
+# Get-AppxPackage -AllUsers -Name Microsoft.XboxGamingOverlay | Remove-AppxPackage
+# Get-AppxPackage -AllUsers -Name Microsoft.MicrosoftEdge | Remove-AppxPackage
+# Get-AppxPackage -AllUsers -Name Microsoft.MixedReality.Portal | Remove-AppxPackage
+# Get-AppxPackage -AllUsers -Name Microsoft.Messaging | Remove-AppxPackage
